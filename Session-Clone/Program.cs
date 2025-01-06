@@ -13,7 +13,7 @@ builder.Services.AddSingleton<IMySessionStorageEngine>(services =>
     return new FileMySessionStorageEngine(FilePath);
 });
 
-builder.Services.AddSingleton<IMySessionStorage, MySessionStorage>();
+builder.Services.AddSingleton<IMySessionStorage, MySessionStorageDictImpl>();
 
 var app = builder.Build();
 
