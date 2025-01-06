@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Session_Clone.Models;
-
 namespace Session_Clone.Controllers;
 
 public class HomeController : Controller
@@ -13,14 +9,24 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> IndexAsync()
     {
-        return View();
+        var session = HttpContext.GetMyUserSession();
+
+        session.SetString("name", "John Doe");
+        await session.CommitAsync();
+
+        return View("Index");
     }
 
-    public IActionResult Privacy()
+    public async Task<IActionResult> PrivacyAsync()
     {
-        return View();
+        var session = HttpContext.GetMyUserSession();
+        await session.LoadAsync();
+
+        var name_session = session.GetString("name");
+
+        return View("Privacy", name_session);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

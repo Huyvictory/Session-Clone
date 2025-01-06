@@ -1,7 +1,19 @@
+using IHostingEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IMySessionStorageEngine>(services =>
+{
+    var FilePath = Path.Combine(services.GetRequiredService<IHostingEnvironment>().ContentRootPath, "Sessions");
+    Directory.CreateDirectory(FilePath);
+
+    return new FileMySessionStorageEngine(FilePath);
+});
+
+builder.Services.AddSingleton<IMySessionStorage, MySessionStorage>();
 
 var app = builder.Build();
 

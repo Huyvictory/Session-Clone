@@ -7,4 +7,8 @@
         <RootNamespace>Session_Clone</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Sessions\" />
+    </ItemGroup>
+
 </Project>
