@@ -37,4 +37,20 @@ public class FileMySessionStorageEngine : IMySessionStorageEngine
 
         return JsonSerializer.Deserialize<Dictionary<string, byte[]>>(read_json_string) ?? [];
     }
+
+    public Dictionary<string, byte[]> Load(string id)
+    {
+        string filePath = Path.Combine(DirectoryPath, id);
+        if (!File.Exists(filePath))
+        {
+            return [];
+        }
+
+        using FileStream fileStream = new FileStream(filePath, FileMode.Open);
+        using StreamReader streamReader = new StreamReader(fileStream);
+
+        var read_json_string = streamReader.ReadToEnd();
+
+        return JsonSerializer.Deserialize<Dictionary<string, byte[]>>(read_json_string) ?? [];
+    }
 }

@@ -18,7 +18,7 @@ public class MySession : ISession
     {
         get
         {
-            LoadAsync(CancellationToken.None).Wait();
+            Load();
             UpdateLastAccessed();
             return true;
         }
@@ -37,6 +37,20 @@ public class MySession : ISession
     public async Task CommitAsync(CancellationToken cancellationToken = default)
     {
         await engine.CommitAsync(Id, _sessions_store, cancellationToken);
+    }
+
+    public void Load()
+    {
+        _sessions_store.Clear();
+
+        var loadedSessionStorage = engine.Load(Id);
+
+        foreach (var (key, value) in loadedSessionStorage)
+        {
+            _sessions_store[key] = value;
+        }
+
+        UpdateLastAccessed();
     }
 
     public async Task LoadAsync(CancellationToken cancellationToken = default)

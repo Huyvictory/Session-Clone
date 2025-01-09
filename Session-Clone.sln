@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Session-Clone", "Session-Clone\Session-Clone.csproj", "{DE068168-CBBF-42C8-AE52-D87851EFD056}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySessionIntegrationTest", "MySessionIntegrationTest\MySessionIntegrationTest.csproj", "{0363A4A8-C1D7-4367-9D3A-55687777752C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{DE068168-CBBF-42C8-AE52-D87851EFD056}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE068168-CBBF-42C8-AE52-D87851EFD056}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE068168-CBBF-42C8-AE52-D87851EFD056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0363A4A8-C1D7-4367-9D3A-55687777752C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0363A4A8-C1D7-4367-9D3A-55687777752C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0363A4A8-C1D7-4367-9D3A-55687777752C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0363A4A8-C1D7-4367-9D3A-55687777752C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

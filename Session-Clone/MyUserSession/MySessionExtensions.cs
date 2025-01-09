@@ -6,6 +6,14 @@ public static class MySessionExtensions
 
     public static ISession GetMyUserSession(this HttpContext context)
     {
+        MySessionScopeContainer? sessionContainer =
+            context.RequestServices.GetRequiredService<MySessionScopeContainer>();
+
+        if (sessionContainer.Session != null)
+        {
+            return sessionContainer.Session;
+        }
+
         string? sessionId = context.Request.Cookies[SessionIdCookieName];
         ISession session;
 
@@ -13,7 +21,13 @@ public static class MySessionExtensions
             ? context.RequestServices.GetRequiredService<IMySessionStorage>().Get(sessionId!)
             : context.RequestServices.GetRequiredService<IMySessionStorage>().Create();
 
-        context.Response.Cookies.Append(SessionIdCookieName, session.Id);
+        context.Response.Cookies.Append(SessionIdCookieName, session.Id, new CookieOptions()
+        {
+            HttpOnly = true,
+        });
+
+        sessionContainer.Session = session;
+
         return session;
     }
 
